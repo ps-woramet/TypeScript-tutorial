@@ -32,6 +32,8 @@ let udfBValue: undefined = undefined;
 
 let nullValue: null = null;
 
+// ----------------------------------------------------------
+
 // TypeScripte Arrays
 // Array ใช้เพื่อเก็บค่าหลายค่าในลิสต์แบบมีลำดับและมีความยืดหยุ่นในการเพิ่มหรือลบค่า
 const names: string[] = [];
@@ -59,8 +61,12 @@ console.log(myNum3);
 console.log(myBool3);
 console.log(myStr3);
 
+// ----------------------------------------------------------
+
 // TypeScript Object
 const car: {type: string, model: string, year: number} = {type: 'honda', model: 'civic', year: 2023}
+
+// ----------------------------------------------------------
 
 // TypeScript Enums (ช้ในกรณีที่คุณต้องการที่จะจำแนกชุดของค่าที่เป็นค่าคงที่)
 // ถ้าไม่กำหนดค่าจะเริ่มจาก 0 ไปเรื่อยๆ ถ้ากำหนดจะเริ่มจากค่าที่กำหนด
@@ -88,6 +94,8 @@ enum MonthList {
   secondMonth = "February",
 }
 console.log(MonthList.firstMonth);
+
+// ----------------------------------------------------------
 
 // Type Aliases (กำหนดชื่อ type เอง)
 type CarYear2 = number;
@@ -132,6 +140,8 @@ function myStausCode(code: string | number){
 myStausCode(404)
 myStausCode('404')
 
+// ----------------------------------------------------------
+
 // functions
 function gettime(): number{
   return new Date().getTime();
@@ -153,6 +163,8 @@ function divide({divided, divisor} : {divided: number, divisor: number}){
 const result = divide({ divided: 10, divisor: 2 });
 console.log(result); // 5
 
+// ----------------------------------------------------------
+
 // รับ array (rest parameter)
 function add(a: number, b: number, ...arr: number[]){
   console.log(a); // 1
@@ -162,11 +174,15 @@ function add(a: number, b: number, ...arr: number[]){
 }
 add(1,2,3,4,5)
 
+// ----------------------------------------------------------
+
 // TypeScript casting
 // as, <override>
 let someName : unknown = 'hello';
 console.log((someName as string).length)
 console.log((<string>someName).length)
+
+// ----------------------------------------------------------
 
 // TypeScript Classes
 class Person{
@@ -181,10 +197,32 @@ class Person{
 const person = new Person('game')
 console.log(person.getName());
 
-// Typescript Generics สามารถทำให้ใช้ function ซ้ำได้
+// ----------------------------------------------------------
+
+// Typescript Generics
+// Generics แปลว่า ทั่วไป
+
+//Generics Type alias
+//รับค่า type มาใช้ใน type alias
+type Email<t>={
+  username: string;
+  password: t;
+}
+const valueEmail : Email<string> = {username: "admin", password:"123"};
+console.log(valueEmail); // {username="admin", password:"123"}
+console.log(typeof(valueEmail.password)); // string
+
+const valueEmail2 : Email<number> = {username: "admin", password: 123};
+console.log(valueEmail2);// {username="admin", password:123}
+console.log(typeof(valueEmail2.password)); // number
+
+// function แบบไม่รับ type
 function identity(value: string){
   return value
 }
+
+// Generics function
+// รับค่า type มาใช้ใน function กำหนด type ของ parameter กำหนด type ของการ return
 function identity2<T>(value: T): T{
   return value
 }
@@ -192,6 +230,8 @@ const resIdentity2 = identity2<number>(123)
 const resIdentity2Str = identity2("i love typescript")
 console.log(resIdentity2);
 console.log(resIdentity2Str);
+
+// ----------------------------------------------------------
 
 // check type
 let value: any = "Hello, TypeScript";
